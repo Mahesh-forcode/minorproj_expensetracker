@@ -18,10 +18,10 @@ Tech Stack
 - **CSS3 (Animations + Responsive UI)**
 
 ## 📂 Project Structure
-expense-tracker/
-│── index.html
-│── style.css
-│── README.md
+expense-tracker
+|- index.html
+|- style.css
+|- README.md
 
 **PRIVIEW**
 <img width="1919" height="1013" alt="image" src="https://github.com/user-attachments/assets/062a1075-5219-4dd4-9848-21956b449eca" />

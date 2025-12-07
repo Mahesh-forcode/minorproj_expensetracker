@@ -16,6 +16,7 @@ This mini project helped me understand UI design, state management, DOM manipula
 Tech Stack
 - **HTML5**
 - **CSS3 (Animations + Responsive UI)**
+- Js
 
 ## 📂 Project Structure
 expense-tracker<br>

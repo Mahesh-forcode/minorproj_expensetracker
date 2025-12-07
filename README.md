@@ -18,9 +18,9 @@ Tech Stack
 - **CSS3 (Animations + Responsive UI)**
 
 ## 📂 Project Structure
-expense-tracker
-|- index.html
-|- style.css
+expense-tracker<br>
+|- index.html<br>
+|- style.css<br>
 |- README.md
 
 **PRIVIEW**

@@ -20,8 +20,9 @@ Tech Stack
 
 ## 📂 Project Structure
 expense-tracker<br>
-|- index.html<br>
-|- style.css<br>
+|- tracker.html<br>
+|- tracker.css<br>
+|-tracker.js<br>
 |- README.md
 
 **PRIVIEW**

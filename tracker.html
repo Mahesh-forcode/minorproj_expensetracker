@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Premium Expense Tracker</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-  <!-- External CSS -->
   <link rel="stylesheet" href="tracker.css">
+  <script src="tracker.js" defer></script>
 </head>
 
 <body>
@@ -92,97 +91,5 @@
       </div>
     </div>
   </div>
-
-  <script>
-    let transactions = [];
-    let currentType = 'income';
-    let filterType = 'all';
-
-    document.querySelectorAll('.type-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        currentType = this.dataset.type;
-      });
-    });
-
-    document.getElementById('transactionForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const description = document.getElementById('description').value;
-      const amount = parseFloat(document.getElementById('amount').value);
-      const category = document.getElementById('category').value;
-      
-      const transaction = {
-        id: Date.now(),
-        type: currentType,
-        description,
-        amount,
-        category,
-        date: new Date().toLocaleDateString('en-IN')
-      };
-      
-      transactions.unshift(transaction);
-      
-      this.reset();
-      updateUI();
-    });
-
-    document.getElementById('filterBtn').addEventListener('click', function() {
-      const filters = ['all', 'income', 'expense'];
-      const currentIndex = filters.indexOf(filterType);
-      filterType = filters[(currentIndex + 1) % filters.length];
-      
-      this.textContent = filterType.charAt(0).toUpperCase() + filterType.slice(1);
-      updateUI();
-    });
-
-    function deleteTransaction(id) {
-      transactions = transactions.filter(t => t.id !== id);
-      updateUI();
-    }
-
-    function updateUI() {
-      const totalIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
-      const totalExpense = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
-      const balance = totalIncome - totalExpense;
-
-      document.getElementById('totalIncome').textContent = `₹${totalIncome.toLocaleString('en-IN')}`;
-      document.getElementById('totalExpense').textContent = `₹${totalExpense.toLocaleString('en-IN')}`;
-      document.getElementById('balance').textContent = `₹${balance.toLocaleString('en-IN')}`;
-
-      const filtered = filterType === 'all'
-        ? transactions
-        : transactions.filter(t => t.type === filterType);
-
-      const list = document.getElementById('transactionsList');
-      const emptyState = document.getElementById('emptyState');
-
-      if (filtered.length === 0) {
-        list.innerHTML = "";
-        emptyState.style.display = "block";
-      } else {
-        emptyState.style.display = "none";
-        list.innerHTML = filtered
-          .map((t, i) => `
-            <div class="transaction-item" style="animation-delay: ${i * 0.1}s">
-              <div class="transaction-icon ${t.type}">${t.category.split(' ')[0]}</div>
-              <div class="transaction-details">
-                <div class="transaction-name">${t.description}</div>
-                <div class="transaction-category">${t.category} • ${t.date}</div>
-              </div>
-              <div class="transaction-amount ${t.type}">
-                ${t.type === 'income' ? '+' : '-'}₹${t.amount.toLocaleString('en-IN')}
-              </div>
-              <button class="delete-btn" onclick="deleteTransaction(${t.id})">🗑️</button>
-            </div>
-          `)
-          .join('');
-      }
-    }
-
-    updateUI();
-  </script>
-
 </body>
 </html>

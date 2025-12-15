@@ -1,4 +1,5 @@
-let transactions = [];
+// Load transactions from localStorage on page load
+let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 let currentType = 'income';
 let filterType = 'all';
 
@@ -92,6 +93,9 @@ function updateUI() {
       `)
       .join('');
   }
+  
+  // Save transactions to localStorage whenever UI updates
+  localStorage.setItem('transactions', JSON.stringify(transactions));
 }
 
 // Initialize UI on page load
